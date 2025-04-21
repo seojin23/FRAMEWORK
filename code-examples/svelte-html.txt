@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Todo List - Svelte</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <script type="module" src="script.js"></script>
+</body>
+</html>
+
+<!-- 아래는 App.svelte -->
+<script>
+  let newTodo = '';
+  let todos = [];
+
+  function addTodo() {
+    const text = newTodo.trim();
+    if (text !== '') {
+      todos = [...todos, text];
+      newTodo = '';
+    }
+  }
+
+  function removeTodo(index) {
+    todos = todos.filter((_, i) => i !== index);
+  }
+</script>
+
+<div class="container">
+  <h1>Todo List</h1>
+  <div class="input-group">
+    <input
+      id="todo-input"
+      bind:value={newTodo}
+      placeholder="할 일을 입력하세요"
+    />
+    <button on:click={addTodo} id="add-button">추가</button>
+  </div>
+
+  <ul id="todo-list">
+    {#each todos as todo, index}
+      <li>
+        {todo}
+        <button class="delete-button" on:click={() => removeTodo(index)}>삭제</button>
+      </li>
+    {/each}
+  </ul>
+</div>
+
+<style>
+  @import './style.css';
+</style>

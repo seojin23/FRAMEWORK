@@ -1,0 +1,22 @@
+const { createApp } = Vue;
+
+createApp({
+  data() {
+    return {
+      newTodo: '',
+      todos: []
+    };
+  },
+  methods: {
+    addTodo() {
+      const text = this.newTodo.trim();
+      if (text !== '') {
+        this.todos.push(text);
+        this.newTodo = '';
+      }
+    },
+    removeTodo(index) {
+      this.todos.splice(index, 1);
+    }
+  }
+}).mount('#app');

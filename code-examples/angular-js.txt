@@ -1,0 +1,16 @@
+angular.module('todoApp', []).controller('TodoController', function ($scope) {
+  $scope.todos = [];
+  $scope.newTodo = '';
+
+  $scope.addTodo = function () {
+    const text = $scope.newTodo.trim();
+    if (text !== '') {
+      $scope.todos.push(text);
+      $scope.newTodo = '';
+    }
+  };
+
+  $scope.removeTodo = function (index) {
+    $scope.todos.splice(index, 1);
+  };
+});

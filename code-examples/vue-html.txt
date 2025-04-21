@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Todo List - Vue</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="app">
+    <div class="container">
+      <h1>Todo List</h1>
+      <div class="input-group">
+        <input
+          type="text"
+          v-model="newTodo"
+          placeholder="할 일을 입력하세요"
+          id="todo-input"
+        />
+        <button @click="addTodo" id="add-button">추가</button>
+      </div>
+      <ul id="todo-list">
+        <li v-for="(todo, index) in todos" :key="index">
+          {{ todo }}
+          <button class="delete-button" @click="removeTodo(index)">삭제</button>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

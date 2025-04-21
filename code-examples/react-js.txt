@@ -1,0 +1,51 @@
+const { useState } = React;
+
+function TodoApp() {
+  const [todos, setTodos] = useState([]);
+  const [input, setInput] = useState('');
+
+  const addTodo = () => {
+    const text = input.trim();
+    if (text !== '') {
+      setTodos([...todos, text]);
+      setInput('');
+    }
+  };
+
+  const removeTodo = (index) => {
+    const updated = todos.filter((_, i) => i !== index);
+    setTodos(updated);
+  };
+
+  return (
+    <div className="container">
+      <h1>Todo List</h1>
+      <div className="input-group">
+        <input
+          type="text"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          placeholder="할 일을 입력하세요"
+          id="todo-input"
+        />
+        <button onClick={addTodo} id="add-button">추가</button>
+      </div>
+      <ul id="todo-list">
+        {todos.map((todo, index) => (
+          <li key={index}>
+            {todo}
+            <button
+              className="delete-button"
+              onClick={() => removeTodo(index)}
+            >
+              삭제
+            </button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<TodoApp />);
